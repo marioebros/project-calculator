@@ -1,5 +1,5 @@
-let currentNumber = "";
-let previousNumber = "";
+let currentNum = "";
+let previousNum = "";
 let operator = "";
 
 const currentDisplayNumber = document.querySelector("currentNumber");
@@ -16,5 +16,11 @@ const numberButtons = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 
 numberButtons.forEach((btn) => {
-  btn.addEventListener("click", (e) => {});
+  btn.addEventListener("click", (e) => {
+    handleNumber(e.target.textContent);
+  });
 });
+
+function handleNumber(number) {
+  console.log(number);
+}
