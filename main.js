@@ -6,7 +6,11 @@ const currentDisplayNumber = document.querySelector(".currentNumber");
 const previousDisplayNumber = document.querySelector(".previousNumber");
 
 const equal = document.querySelector(".equal");
-equal.addEventListener("click", calculate);
+equal.addEventListener("click", () => {
+  if (currentNum != "" && previousNum != "") {
+    calculate();
+  }
+});
 
 const decimal = document.querySelector(".decimal");
 
@@ -48,14 +52,39 @@ function calculate() {
   currentNum = Number(currentNum);
 
   if (operator === "+") {
-    previousNum = previousNum + currentNum;
+    previousNum += currentNum;
   } else if (operator === "-") {
-    previousNum = previousNum - currentNum;
+    previousNum -= currentNum;
   } else if (operator === "x") {
-    previousNum = previousNum * currentNum;
+    previousNum *= currentNum;
   } else if (operator === "/") {
-    previousNum = previousNum / currentNum;
+    if (currentNum <= 0) {
+      previousNum = "Error";
+      displayResults();
+      return;
+    }
+    previousNum /= currentNum;
   }
+  previousNum = roundNumber(previousNum);
+  previousNum = previousNum.toString();
+  displayResults();
+
+  function roundNumber(num) {
+    return Math.round(num * 100000) / 100000;
+  }
+
+  function displayResults() {
+    previousDisplayNumber.textContent = "";
+    operator = "";
+    if (previousNum.length <= 11) {
+      currentDisplayNumber.textContent = previousNum;
+    } else {
+      currentDisplayNumber.textContent = previousNum.slice(0, 11) + "...";
+    }
+  }
+
+  previousNum = previousNum.toString();
   previousDisplayNumber.textContent = "";
   currentDisplayNumber.textContent = previousNum;
+  operator = "";
 }
