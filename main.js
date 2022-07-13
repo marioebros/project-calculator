@@ -95,14 +95,15 @@ function calculate() {
   }
 
   function displayResults() {
-    previousDisplayNumber.textContent = "";
-    operator = "";
-    if (previousNum.length <= 11) {
-      currentDisplayNumber.textContent = previousNum;
-    } else {
-      currentDisplayNumber.textContent = previousNum.slice(0, 11) + "...";
+      if (previousNum.length <= 11) {
+          currentDisplayNumber.textContent = previousNum;
+      } else {
+          currentDisplayNumber.textContent = previousNum.slice(0, 11) + "...";
+      }
+      previousDisplayNumber.textContent = "";
+      operator = "";
+      currentNum = "";
     }
-  }
 
   function clearCalculator() {
     currentNum = "";
@@ -117,4 +118,24 @@ function calculate() {
           currentNum += ".";
           currentDisplayNumber.textContent = currentNum
       }
-  }
+    }
+
+    function handleKeyPress(e) {
+        e.preventDefault();
+        if (e.key >= 0 && e.key <= 9) {
+            handleNumber(e.key);
+        }
+        if (e.key === "Enter" || (e.key === "=" && currentNum != "" && previousNum != "")
+        ) {
+            compute();
+        }
+        if (e.key === "+" || e.key === "-" || e.key === "/") {
+            handleOperator(e.key);
+        }
+        if (e.key === "*") {
+            handleOperator("x");
+        }
+        if (e.key === ".") {
+            addDecimal();
+        }
+    }
