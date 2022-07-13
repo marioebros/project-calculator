@@ -15,6 +15,7 @@ equal.addEventListener("click", () => {
 const decimal = document.querySelector(".decimal");
 
 const clear = document.querySelector(".clear");
+clear.addEventListener("click", clearCalculator);
 
 const numberButtons = document.querySelectorAll(".number");
 
@@ -40,11 +41,24 @@ operators.forEach((btn) => {
 });
 
 function handleOperator(op) {
-  operator = op;
-  previousNum = currentNum;
-  previousDisplayNumber.textContent = previousNum + " " + operator;
-  currentNum = "";
-  currentDisplayNumber.textContent = "";
+    if (previousNum === "") {
+        previousNum = currentNum;
+        operatorCheck(op);
+    } else if (currentNum === "") {
+        operatorCheck(op);
+    } else {
+        calculate();
+        operator = op;
+        currentDisplayNumber.textContent = "0";
+        previousDisplayNumber.textContent = previousNum + " " + operator;
+    }
+}
+
+function operatorCheck(text) {
+    operator = text;
+    previousDisplayNumber.textContent = previousNum + " " + operator;
+    currentDisplayNumber.textContent = "0";
+    currentNum = "";
 }
 
 function calculate() {
@@ -83,8 +97,10 @@ function calculate() {
     }
   }
 
-  previousNum = previousNum.toString();
-  previousDisplayNumber.textContent = "";
-  currentDisplayNumber.textContent = previousNum;
-  operator = "";
-}
+  function clearCalculator() {
+    currentNum = "";
+    previousNum = "";
+    operator = "";
+    currentDisplayNumber.textContent = "";
+    previousDisplayNumber.textContent = "";
+  }
