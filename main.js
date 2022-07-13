@@ -13,6 +13,9 @@ equal.addEventListener("click", () => {
 });
 
 const decimal = document.querySelector(".decimal");
+decimal.addEventListener("click", () => {
+    addDecimal();
+});
 
 const clear = document.querySelector(".clear");
 clear.addEventListener("click", clearCalculator);
@@ -28,9 +31,13 @@ numberButtons.forEach((btn) => {
 });
 
 function handleNumber(number) {
-  if (currentNum.length <= 11) {
-    currentNum += number;
+  if (previousNum !== "" && currentNum !=="" && operator === "") {
+    previousNum = ""
     currentDisplayNumber.textContent = currentNum;
+  }
+  if (currentNum.length <= 11) {
+      currentNum += number;
+      currentDisplayNumber.textContent = currentNum;
   }
 }
 
@@ -101,6 +108,13 @@ function calculate() {
     currentNum = "";
     previousNum = "";
     operator = "";
-    currentDisplayNumber.textContent = "";
+    currentDisplayNumber.textContent = "0";
     previousDisplayNumber.textContent = "";
+  }
+  
+  function addDecimal() {
+      if (!currentNum.includes(".")) {
+          currentNum += ".";
+          currentDisplayNumber.textContent = currentNum
+      }
   }
