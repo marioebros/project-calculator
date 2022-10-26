@@ -168,7 +168,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/MarioElizalde12) - mariomelizalde@gmail.com
+Your Name - [@MarioElizalde12](https://twitter.com/MarioElizalde12) - mariomelizalde@gmail.com
 
 Project Link: [https://github.com/marioebros/project-calculator](https://github.com/marioebros/project-calculator)
 
